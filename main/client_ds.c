@@ -101,6 +101,22 @@ int32_t get_client_sockfd(client_list *clients, char *username){
 }
 
 
+client_t *get_client(client_list *clients, uint16_t sockfd){
+
+        client_n *current = clients->head;
+        
+        while(current!=NULL){
+                if(current->client_p->sockfd == sockfd){
+                        return current->client_p;
+                }
+                current = current->next;
+        }
+
+        // if such client doesn't exist.
+        return NULL;
+}
+
+
 bool remove_client(client_list *clients, uint16_t client_sockfd){
 
         client_n *current = clients->head;
@@ -126,6 +142,34 @@ bool remove_client(client_list *clients, uint16_t client_sockfd){
         // no such client exists.
         return false;
 }
+
+
+void destroy_client_list(client_list *clients){
+        client_n *current = clients->head;
+        client_n *next = current;
+
+        while(current != NULL){
+                free(current->client_p);
+                next = current->next;
+                free(current);
+                current = next;
+        }
+
+        free(clients);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
