@@ -43,7 +43,7 @@ client_list *create_client_list(){
 
 
 bool add_client(client_list *clients, client_t *client){
-        client_t *new = malloc(sizeof(client_t));
+        client_t *new = calloc(1, sizeof(client_t));
         if(new == NULL){
                 fprintf(stderr, "Couldn't allocate memory for adding a client.\n");
                 return false;
@@ -51,6 +51,7 @@ bool add_client(client_list *clients, client_t *client){
 
         new->sockfd = client->sockfd;
         strcpy(new->username, client->username);
+
 
         client_n *new_node = malloc(sizeof(client_n));
         if(new_node == NULL){
