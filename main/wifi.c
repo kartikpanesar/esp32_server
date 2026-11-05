@@ -5,9 +5,10 @@
 #include "esp_log.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/event_groups.h"
+#include "wifi_config.h"
 
-#define WIFI_SSID   "Airtel_Airtel"
-#define WIFI_PASS   "Sun@kar69"
+#define WIFI_SSID   SSID
+#define WIFI_PASS   PASS
 
 #define GOT_IP_BIT  BIT0
 
@@ -59,3 +60,6 @@ void wifi_init_sta(void)
     // Block until we have an IP.
     xEventGroupWaitBits(wifi_events, GOT_IP_BIT, pdFALSE, pdTRUE, portMAX_DELAY);
 }
+
+
+
